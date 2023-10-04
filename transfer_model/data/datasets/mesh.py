@@ -41,17 +41,16 @@ class MeshFolder(Dataset):
         '''
         if exts is None:
             exts = ['.obj', '.ply']
-
         self.data_folder = osp.expandvars(data_folder)
-
-        logger.info(
-            f'Building mesh folder dataset for folder: {self.data_folder}')
-
+        logger.info(f'Building mesh folder dataset for folder: {self.data_folder}')
+        # numpy array, all path of meshes 
         self.data_paths = np.array([
             osp.join(self.data_folder, fname)
             for fname in os.listdir(self.data_folder)
             if any(fname.endswith(ext) for ext in exts)
         ])
+        ## sort the paths of data
+        self.data_paths = np.sort(self.data_paths)
         self.num_items = len(self.data_paths)
 
     def __len__(self) -> int:
@@ -59,10 +58,8 @@ class MeshFolder(Dataset):
 
     def __getitem__(self, index):
         mesh_path = self.data_paths[index]
-
         # Load the mesh
         mesh = trimesh.load(mesh_path, process=False)
-
         return {
             'vertices': np.asarray(mesh.vertices, dtype=np.float32),
             'faces': np.asarray(mesh.faces, dtype=np.int32),

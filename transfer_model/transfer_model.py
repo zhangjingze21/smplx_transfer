@@ -30,7 +30,6 @@ from .utils import (
     Tensor, batch_rodrigues, apply_deformation_transfer)
 from .losses import build_loss
 
-
 def summary_closure(gt_vertices, var_dict, body_model, mask_ids=None):
     param_dict = {}
     for key, var in var_dict.items():
@@ -99,8 +98,7 @@ def build_model_forward_closure(
                     # Simply pass the variable
                     param_dict[key] = var
 
-            return body_model(return_full_pose=True, get_skin=True,
-                              **param_dict)
+            return body_model(return_full_pose=True, get_skin=True, **param_dict)
     return model_forward
 
 
@@ -210,41 +208,26 @@ def get_variables(
 
     device = next(body_model.buffers()).device
 
-    if (body_model.name() == 'SMPL' or body_model.name() == 'SMPL+H' or
-            body_model.name() == 'SMPL-X'):
+    if (body_model.name() == 'SMPL' or body_model.name() == 'SMPL+H' or body_model.name() == 'SMPL-X'):
         var_dict.update({
-            'transl': torch.zeros(
-                [batch_size, 3], device=device, dtype=dtype),
-            'global_orient': torch.zeros(
-                [batch_size, 1, 3], device=device, dtype=dtype),
-            'body_pose': torch.zeros(
-                [batch_size, body_model.NUM_BODY_JOINTS, 3],
-                device=device, dtype=dtype),
-            'betas': torch.zeros([batch_size, body_model.num_betas],
-                                 dtype=dtype, device=device),
+            'transl': torch.zeros([batch_size, 3], device=device, dtype=dtype),
+            'global_orient': torch.zeros([batch_size, 1, 3], device=device, dtype=dtype),
+            'body_pose': torch.zeros([batch_size, body_model.NUM_BODY_JOINTS, 3], device=device, dtype=dtype),
+            'betas': torch.zeros([batch_size, body_model.num_betas],dtype=dtype, device=device),
         })
 
     if body_model.name() == 'SMPL+H' or body_model.name() == 'SMPL-X':
         var_dict.update(
-            left_hand_pose=torch.zeros(
-                [batch_size, body_model.NUM_HAND_JOINTS, 3], device=device,
-                dtype=dtype),
-            right_hand_pose=torch.zeros(
-                [batch_size, body_model.NUM_HAND_JOINTS, 3], device=device,
-                dtype=dtype),
+            left_hand_pose=torch.zeros([batch_size, body_model.NUM_HAND_JOINTS, 3], device=device, dtype=dtype),
+            right_hand_pose=torch.zeros([batch_size, body_model.NUM_HAND_JOINTS, 3], device=device, dtype=dtype),
         )
 
     if body_model.name() == 'SMPL-X':
         var_dict.update(
-            jaw_pose=torch.zeros([batch_size, 1, 3],
-                                 device=device, dtype=dtype),
-            leye_pose=torch.zeros([batch_size, 1, 3],
-                                  device=device, dtype=dtype),
-            reye_pose=torch.zeros([batch_size, 1, 3],
-                                  device=device, dtype=dtype),
-            expression=torch.zeros(
-                [batch_size, body_model.num_expression_coeffs],
-                device=device, dtype=dtype),
+            jaw_pose=torch.zeros([batch_size, 1, 3], device=device, dtype=dtype),
+            leye_pose=torch.zeros([batch_size, 1, 3], device=device, dtype=dtype),
+            reye_pose=torch.zeros([batch_size, 1, 3], device=device, dtype=dtype),
+            expression=torch.zeros([batch_size, body_model.num_expression_coeffs], device=device, dtype=dtype),
         )
 
     # Toggle gradients to True
@@ -265,18 +248,14 @@ def run_fitting(
     '''
     vertices = batch['vertices']
     faces = batch['faces']
-
     batch_size = len(vertices)
     dtype, device = vertices.dtype, vertices.device
     summary_steps = exp_cfg.get('summary_steps')
     interactive = exp_cfg.get('interactive')
-
     # Get the parameters from the model
     var_dict = get_variables(batch_size, body_model)
-
     # Build the optimizer object for the current batch
     optim_cfg = exp_cfg.get('optim', {})
-
     def_vertices = apply_deformation_transfer(def_matrix, vertices, faces)
 
     if mask_ids is None:
@@ -290,12 +269,10 @@ def run_fitting(
         body_model.v_template.detach().cpu().numpy(), body_model.faces[f_sel])
 
     def log_closure():
-        return summary_closure(def_vertices, var_dict, body_model,
-                               mask_ids=mask_ids)
+        return summary_closure(def_vertices, var_dict, body_model, mask_ids=mask_ids)
 
     edge_fitting_cfg = exp_cfg.get('edge_fitting', {})
-    edge_loss = build_loss(type='vertex-edge', gt_edges=vpe, est_edges=vpe,
-                           **edge_fitting_cfg)
+    edge_loss = build_loss(type='vertex-edge', gt_edges=vpe, est_edges=vpe, **edge_fitting_cfg)
     edge_loss = edge_loss.to(device=device)
 
     vertex_fitting_cfg = exp_cfg.get('vertex_fitting', {})
@@ -309,7 +286,6 @@ def run_fitting(
         for key, var in tqdm(var_dict.items(), desc='Parts'):
             if 'pose' not in key:
                 continue
-
             for jidx in tqdm(range(var.shape[1]), desc='Joints'):
                 part = torch.zeros(
                     [batch_size, 3], dtype=dtype, device=device,
@@ -320,12 +296,12 @@ def run_fitting(
                     body_model, var_dict, edge_loss, optimizer_dict,
                     def_vertices, per_part=per_part, part_key=key, jidx=jidx,
                     part=part)
-
+                
                 minimize(optimizer_dict['optimizer'], closure,
-                         params=[part],
-                         summary_closure=log_closure,
-                         summary_steps=summary_steps,
-                         interactive=interactive,
+                        params=[part],
+                        summary_closure=log_closure,
+                        summary_steps=summary_steps,
+                        interactive=interactive,
                          **optim_cfg)
                 with torch.no_grad():
                     var[:, jidx] = part
@@ -335,15 +311,16 @@ def run_fitting(
             body_model, var_dict, edge_loss, optimizer_dict,
             def_vertices, per_part=per_part)
 
+        # BUG: The following line is not working
         minimize(optimizer_dict['optimizer'], closure,
-                 params=var_dict.values(),
-                 summary_closure=log_closure,
-                 summary_steps=summary_steps,
-                 interactive=interactive,
-                 **optim_cfg)
+                params=var_dict.values(),
+                summary_closure=log_closure,
+                summary_steps=summary_steps,
+                interactive=interactive,
+                **optim_cfg)
 
-    if 'translation' in var_dict:
-        optimizer_dict = build_optimizer([var_dict['translation']], optim_cfg)
+    if 'transl' in var_dict:
+        optimizer_dict = build_optimizer([var_dict['transl']], optim_cfg)
         closure = build_vertex_closure(
             body_model, var_dict,
             optimizer_dict,
@@ -351,16 +328,16 @@ def run_fitting(
             vertex_loss=vertex_loss,
             mask_ids=mask_ids,
             per_part=False,
-            params_to_opt=[var_dict['translation']],
+            params_to_opt=[var_dict['transl']],
         )
         # Optimize translation
         minimize(optimizer_dict['optimizer'],
-                 closure,
-                 params=[var_dict['translation']],
-                 summary_closure=log_closure,
-                 summary_steps=summary_steps,
-                 interactive=interactive,
-                 **optim_cfg)
+                closure,
+                params=[var_dict['transl']],
+                summary_closure=log_closure,
+                summary_steps=summary_steps,
+                interactive=interactive,
+                **optim_cfg)
 
     #  Optimize all model parameters with vertex-based loss
     optimizer_dict = build_optimizer(list(var_dict.values()), optim_cfg)
@@ -372,11 +349,11 @@ def run_fitting(
         per_part=False,
         mask_ids=mask_ids)
     minimize(optimizer_dict['optimizer'], closure,
-             params=list(var_dict.values()),
-             summary_closure=log_closure,
-             summary_steps=summary_steps,
-             interactive=interactive,
-             **optim_cfg)
+            params=list(var_dict.values()),
+            summary_closure=log_closure,
+            summary_steps=summary_steps,
+            interactive=interactive,
+            **optim_cfg)
 
     param_dict = {}
     for key, var in var_dict.items():
@@ -388,8 +365,13 @@ def run_fitting(
             # Simply pass the variable
             param_dict[key] = var
 
-    body_model_output = body_model(
-        return_full_pose=True, get_skin=True, **param_dict)
+    body_model_output = body_model(return_full_pose=True, get_skin=True, **param_dict)
+    for key, val in body_model_output._asdict().items():
+        if isinstance(val, torch.Tensor):
+            print(key, val.shape)
+        else:
+            print(key, val)
+    sys.exit(3)
     var_dict.update(body_model_output._asdict())
     var_dict['faces'] = body_model.faces
 

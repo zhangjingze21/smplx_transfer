@@ -1209,7 +1209,9 @@ class SMPLX(SMPLH):
         if transl is None:
             if hasattr(self, 'transl'):
                 transl = self.transl
-
+        # print(left_hand_pose.shape, right_hand_pose.shape)
+        # import sys
+        # sys.exit()
         if self.use_pca:
             left_hand_pose = torch.einsum(
                 'bi,ij->bj', [left_hand_pose, self.left_hand_components])

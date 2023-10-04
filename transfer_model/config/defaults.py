@@ -53,7 +53,7 @@ class Config:
     float_type: str = 'float'
     logger_level: str = 'INFO'
     interactive: bool = True
-    batch_size: Optional[int] = 1
+    batch_size: Optional[int] = 128
     color_path: str = 'data/smpl_with_colors.ply'
 
     optim: OptimConfig = optim_cfg

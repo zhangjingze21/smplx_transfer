@@ -38,11 +38,7 @@ def build_dataloader(exp_cfg):
     batch_size = exp_cfg.batch_size
     num_workers = exp_cfg.datasets.num_workers
 
-    logger.info(
-        f'Creating dataloader with B={batch_size}, workers={num_workers}')
-    dataloader = dutils.DataLoader(dataset,
-                                   batch_size=batch_size,
-                                   num_workers=num_workers,
-                                   shuffle=False)
+    logger.info(f'Creating dataloader with B={batch_size}, workers={num_workers}')
+    dataloader = dutils.DataLoader(dataset, batch_size=batch_size,  num_workers=num_workers, shuffle=False)
 
     return {'dataloader': dataloader, 'dataset': dataset}

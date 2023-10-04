@@ -112,6 +112,7 @@ class Struct(object):
 
 
 def to_np(array, dtype=np.float32):
+    # TODO：find the meaning of the code below
     if 'scipy.sparse' in str(type(array)):
         array = array.todense()
     return np.array(array, dtype=dtype)

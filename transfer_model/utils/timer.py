@@ -58,3 +58,15 @@ def timer_decorator(sync=False, name=''):
             return result
         return timed
     return wrapper
+
+class Timer2:
+
+	def __init__(self):
+		self._start = time.time()
+
+	def __call__(self, reset=True):
+		now = time.time()
+		diff = now - self._start
+		if reset:
+			self._start = now
+		return diff

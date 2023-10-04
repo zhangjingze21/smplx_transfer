@@ -1,5 +1,5 @@
 # merges the output of the main transfer_model script
-
+import os
 import torch
 from pathlib import Path
 import pickle
@@ -30,22 +30,23 @@ IGNORED_KEYS = [
 ]
 
 def aggregate_rotmats(x):
-    x = torch.cat(x, dim=0).detach().numpy()
+    x = torch.cat(x, dim=0).detach().cpu().numpy()
     s = x.shape[:-2]
     x = R.from_matrix(x.reshape(-1, 3, 3)).as_rotvec()
     x = x.reshape(s[0], -1)
     return x
 
-aggregate_function = {k: lambda x: torch.cat(x, 0).detach().numpy() for k in KEYS}
-aggregate_function["betas"] = lambda x: torch.cat(x, 0).mean(0).detach().numpy()
+aggregate_function = {k: lambda x: torch.cat(x, 0).detach().cpu().numpy() for k in KEYS}
+# beta's aggregate function is the function that get the average value
+aggregate_function["betas"] = lambda x: torch.cat(x, 0).mean(0).detach().cpu().numpy()
 
 for k in ["global_orient", "body_pose", "left_hand_pose", "right_hand_pose", "jaw_pose", "full_pose"]:
     aggregate_function[k] = aggregate_rotmats
 
 def merge(output_dir, gender):
     output_dir = Path(output_dir)
-    assert output_dir.exists()
-    assert output_dir.is_dir()
+    if output_dir.exists() == False or output_dir.is_dir() == False:
+        os.makedirs(output_dir)
 
     # get list of all pkl files in output_dir with fixed length numeral names
     pkl_files = [f for f in output_dir.glob("*.pkl") if f.stem != "merged"]

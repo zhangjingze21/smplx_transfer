@@ -73,3 +73,5 @@ def apply_deformation_transfer(
     else:
         def_vertices = torch.einsum('mn,bni->bmi', [def_matrix, vertices])
         return def_vertices
+
+

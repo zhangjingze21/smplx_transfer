@@ -32,20 +32,24 @@ def parse_args(argv=None) -> OmegaConf:
 
     description = 'Model transfer script'
     parser = argparse.ArgumentParser(formatter_class=arg_formatter,
-                                     description=description)
+                                    description=description)
 
     parser.add_argument('--exp-cfg', type=str, dest='exp_cfg',
                         help='The configuration of the experiment')
     parser.add_argument('--exp-opts', default=[], dest='exp_opts',
                         nargs='*',
                         help='Command line arguments')
-
+    parser.add_argument('--motion-path', required=True, type=str, help="The path to the motion file to process")
+    parser.add_argument("--output-folder", required=True, type=str, help="The path to the output folder")
+    parser.add_argument("--batch-size", required=True, type=int)
     cmd_args = parser.parse_args()
-
     cfg = default_conf.copy()
+    cfg.batch_size = cmd_args.batch_size
+    cfg.output_folder = cmd_args.output_folder
+    cfg.datasets.mesh_folder.data_folder = cmd_args.motion_path
     if cmd_args.exp_cfg:
         cfg.merge_with(OmegaConf.load(cmd_args.exp_cfg))
     if cmd_args.exp_opts:
         cfg.merge_with(OmegaConf.from_cli(cmd_args.exp_opts))
-
+    
     return cfg

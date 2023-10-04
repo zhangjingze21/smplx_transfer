@@ -13,7 +13,9 @@
 # for Intelligent Systems. All rights reserved.
 #
 # Contact: Vassilis Choutas, vassilis.choutas@tuebingen.mpg.de
-
+import sys
+import time 
+from pyinstrument import Profiler
 from typing import List, Union, Callable, Optional, Dict
 import torch
 from loguru import logger
@@ -60,12 +62,10 @@ def minimize(
             if loss_rel_change <= ftol:
                 prev_loss = loss.item()
                 break
-
         if (all([var.grad.view(-1).abs().max().item() < gtol
-                 for var in params if var.grad is not None]) and gtol > 0):
+                for var in params if var.grad is not None]) and gtol > 0):
             prev_loss = loss.item()
             break
-
         if interactive and n % summary_steps == 0:
             logger.info(f'[{n:05d}] Loss: {loss.item():.4f}')
             if summary_closure is not None:
@@ -82,5 +82,4 @@ def minimize(
             summaries = summary_closure()
             for key, val in summaries.items():
                 logger.info(f'[{n + 1:05d}] {key}: {val:.4f}')
-
     return prev_loss

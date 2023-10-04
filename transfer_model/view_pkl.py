@@ -14,8 +14,8 @@ from tqdm.auto import tqdm, trange
 from pathlib import Path
 
 def main(model_folder,
-         motion_file,
-         model_type='smplx',
+        motion_file,
+        model_type='smplx',
          ext='npz',
          gender='neutral',
          plot_joints=False,
@@ -49,11 +49,11 @@ def main(model_folder,
     gender = str(motion['gender'])
 
     model = smplx.create(model_folder, model_type=model_type,
-                         gender=gender, use_face_contour=use_face_contour,
-                         num_betas=num_betas,
-                         num_expression_coeffs=num_expression_coeffs,
-                         use_pca=False,
-                         ext=ext)
+                        gender=gender, use_face_contour=use_face_contour,
+                        num_betas=num_betas,
+                        num_expression_coeffs=num_expression_coeffs,
+                        use_pca=False,
+                        ext=ext)
 
     betas, expression = motion['betas'], None
     betas = betas.unsqueeze(0)[:, :model.num_betas]
@@ -85,24 +85,26 @@ def main(model_folder,
         vertices = output.vertices.detach().cpu().numpy().squeeze()
         joints = output.joints.detach().cpu().numpy().squeeze()
 
-        vertex_colors = np.ones([vertices.shape[0], 4]) * [0.3, 0.3, 0.3, 0.8]
-        tri_mesh = trimesh.Trimesh(vertices, model.faces,
-                                    vertex_colors=vertex_colors)
+        
 
-        mesh = pyrender.Mesh.from_trimesh(tri_mesh)
+        # vertex_colors = np.ones([vertices.shape[0], 4]) * [0.3, 0.3, 0.3, 0.8]
+        # tri_mesh = trimesh.Trimesh(vertices, model.faces,
+        #                             vertex_colors=vertex_colors)
 
-        scene = pyrender.Scene()
-        scene.add(mesh)
+        # mesh = pyrender.Mesh.from_trimesh(tri_mesh)
 
-        if plot_joints:
-            sm = trimesh.creation.uv_sphere(radius=0.005)
-            sm.visual.vertex_colors = [0.9, 0.1, 0.1, 1.0]
-            tfs = np.tile(np.eye(4), (len(joints), 1, 1))
-            tfs[:, :3, 3] = joints
-            joints_pcl = pyrender.Mesh.from_trimesh(sm, poses=tfs)
-            scene.add(joints_pcl)
+        # scene = pyrender.Scene()
+        # scene.add(mesh)
 
-        pyrender.Viewer(scene, use_raymond_lighting=True)
+        # if plot_joints:
+        #     sm = trimesh.creation.uv_sphere(radius=0.005)
+        #     sm.visual.vertex_colors = [0.9, 0.1, 0.1, 1.0]
+        #     tfs = np.tile(np.eye(4), (len(joints), 1, 1))
+        #     tfs[:, :3, 3] = joints
+        #     joints_pcl = pyrender.Mesh.from_trimesh(sm, poses=tfs)
+        #     scene.add(joints_pcl)
+
+        # pyrender.Viewer(scene, use_raymond_lighting=True)
 
 
 if __name__ == '__main__':

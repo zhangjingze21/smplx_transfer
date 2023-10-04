@@ -165,6 +165,8 @@ class SMPL(nn.Module):
 
         # the shape of beta, where beta is the shape parameter
         self._num_betas = num_betas
+        # cut off the unuseful element for shapedirs
+        # shapedirs.shape: (6890, 3, 300)-->(6890, 3, 10)
         shapedirs = shapedirs[:, :, :num_betas]
         # The shape components
         self.register_buffer(

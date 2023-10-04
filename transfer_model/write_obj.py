@@ -20,7 +20,7 @@ def main(
     model_folder,
     motion_file,
     output_folder,
-    model_type="smplh",
+    model_type="smplx",
     ext="npz",
     gender="neutral",
     plot_joints=False,
@@ -88,10 +88,15 @@ def main(
         body_pose = poses[:, 3:66]
         left_hand_pose = poses[:, 66:111]
         right_hand_pose = poses[:, 111:156]
-    else:
-        body_pose = poses[:, 3:]
-        left_hand_pose = np.zeros((n, 3))
-        right_hand_pose = np.zeros((n, 3))
+    if model_type == "smplx":
+        body_pose = poses[:, 3:66]
+        left_hand_pose = poses[:, 66:111]
+        right_hand_pose = poses[:, 111:156]
+        jaw_pose = poses[:, 156:159]
+        leye_pose = poses[:, 159:162]
+        reye_pose = poses[:, 162:165]
+        expression = poses[:, 165:]
+
     # if sample_expression:
     #     expression = torch.randn(
     #         [1, model.num_expression_coeffs], dtype=torch.float32)
@@ -108,7 +113,7 @@ def main(
             body_pose=body_pose[pose_idx],
             left_hand_pose=left_hand_pose[pose_idx],
             right_hand_pose=right_hand_pose[pose_idx],
-            # expression=expression,
+            # expression=expression[pose_idx],
             return_verts=True,
         )
         vertices = output.vertices.detach().cpu().numpy().squeeze()
