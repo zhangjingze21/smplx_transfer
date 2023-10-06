@@ -216,22 +216,23 @@ def lbs(
     # N x J x 3 x 3
     ident = torch.eye(3, dtype=dtype, device=device)
     if pose2rot:
-        rot_mats = batch_rodrigues(pose.view(-1, 3)).view(
-            [batch_size, -1, 3, 3])
-
+        rot_mats = batch_rodrigues(pose.view(-1, 3)).view([batch_size, -1, 3, 3])
         pose_feature = (rot_mats[:, 1:, :, :] - ident).view([batch_size, -1])
         # (N x P) x (P, V * 3) -> N x V x 3
-        pose_offsets = torch.matmul(
-            pose_feature, posedirs).view(batch_size, -1, 3)
+        pose_offsets = torch.matmul(pose_feature, posedirs).view(batch_size, -1, 3)
     else:
         pose_feature = pose[:, 1:].view(batch_size, -1, 3, 3) - ident
         rot_mats = pose.view(batch_size, -1, 3, 3)
-
-        pose_offsets = torch.matmul(pose_feature.view(batch_size, -1),
-                                    posedirs).view(batch_size, -1, 3)
+        pose_offsets = torch.matmul(pose_feature.view(batch_size, -1), posedirs).view(batch_size, -1, 3)
 
     v_posed = pose_offsets + v_shaped
     # 4. Get the global joint location
+    ## ERROR
+    ## BUG
+    print('J.shape: ', J.shape)
+    print('parents.shape: ', parents.shape)
+    print('rot_mats.shape: ', rot_mats.shape)
+    
     J_transformed, A = batch_rigid_transform(rot_mats, J, parents, dtype=dtype)
 
     # 5. Do skinning:
@@ -342,8 +343,9 @@ def transform_mat(R: Tensor, t: Tensor) -> Tensor:
             - T: Bx4x4 Transformation matrix
     '''
     # No padding left or right, only add an extra row
-    return torch.cat([F.pad(R, [0, 0, 0, 1]),
-                      F.pad(t, [0, 0, 0, 1], value=1)], dim=2)
+    print(R.shape)
+    print(t.shape)
+    return torch.cat([F.pad(R, [0, 0, 0, 1]), F.pad(t, [0, 0, 0, 1], value=1)], dim=2)
 
 
 def batch_rigid_transform(
@@ -377,12 +379,14 @@ def batch_rigid_transform(
 
     joints = torch.unsqueeze(joints, dim=-1)
 
+    
     rel_joints = joints.clone()
     rel_joints[:, 1:] -= joints[:, parents[1:]]
 
     transforms_mat = transform_mat(
         rot_mats.reshape(-1, 3, 3),
-        rel_joints.reshape(-1, 3, 1)).reshape(-1, joints.shape[1], 4, 4)
+        rel_joints.reshape(-1, 3, 1)
+    ).reshape(-1, joints.shape[1], 4, 4)
 
     transform_chain = [transforms_mat[:, 0]]
     for i in range(1, parents.shape[0]):

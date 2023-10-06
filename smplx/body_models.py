@@ -1212,12 +1212,18 @@ class SMPLX(SMPLH):
         # print(left_hand_pose.shape, right_hand_pose.shape)
         # import sys
         # sys.exit()
-        if self.use_pca:
-            left_hand_pose = torch.einsum(
-                'bi,ij->bj', [left_hand_pose, self.left_hand_components])
-            right_hand_pose = torch.einsum(
-                'bi,ij->bj', [right_hand_pose, self.right_hand_components])
-
+        # left_hand_pose = left_hand_pose.reshape(-1, 45)
+        # right_hand_pose = right_hand_pose.reshape(-1, 45)
+        # print(left_hand_pose.shape)
+        # print(right_hand_pose.shape)
+        # print(self.left_hand_components.shape)
+        # print(self.right_hand_components.shape)
+        # if self.use_pca:
+        #     left_hand_pose = torch.einsum('bi,ji->bj', [left_hand_pose, self.left_hand_components])
+        #     right_hand_pose = torch.einsum('bi,ji->bj', [right_hand_pose, self.right_hand_components])
+        # print(left_hand_pose.shape)
+        # import sys
+        # sys.exit(0)
         full_pose = torch.cat([global_orient.reshape(-1, 1, 3),
                                body_pose.reshape(-1, self.NUM_BODY_JOINTS, 3),
                                jaw_pose.reshape(-1, 1, 3),
