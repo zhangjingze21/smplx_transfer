@@ -70,19 +70,20 @@ def build_model_forward_closure(
         def model_forward():
             param_dict = {}
             for key, var in var_dict.items():
-                if part_key == key:
-                    param_dict[key] = batch_rodrigues(
-                        var.reshape(-1, 3)).reshape(len(var), -1, 3, 3)
-                    param_dict[key][:, jidx] = batch_rodrigues(
-                        part.reshape(-1, 3)).reshape(-1, 3, 3)
-                else:
-                    # Decode the axis-angles
-                    if 'pose' in key or 'orient' in key:
-                        param_dict[key] = batch_rodrigues(
-                            var.reshape(-1, 3)).reshape(len(var), -1, 3, 3)
-                    else:
-                        # Simply pass the variable
-                        param_dict[key] = var
+                param_dict[key] = var
+                # if part_key == key:
+                #     param_dict[key] = batch_rodrigues(
+                #         var.reshape(-1, 3)).reshape(len(var), -1, 3, 3)
+                #     param_dict[key][:, jidx] = batch_rodrigues(
+                #         part.reshape(-1, 3)).reshape(-1, 3, 3)
+                # else:
+                #     # Decode the axis-angles
+                #     if 'pose' in key or 'orient' in key:
+                #         param_dict[key] = batch_rodrigues(
+                #             var.reshape(-1, 3)).reshape(len(var), -1, 3, 3)
+                #     else:
+                #         # Simply pass the variable
+                #         param_dict[key] = var
 
             return body_model(
                 return_full_pose=True, get_skin=True, **param_dict)
@@ -90,14 +91,16 @@ def build_model_forward_closure(
         def model_forward():
             param_dict = {}
             for key, var in var_dict.items():
-                # Decode the axis-angles
-                if 'pose' in key or 'orient' in key:
-                    param_dict[key] = batch_rodrigues(
-                        var.reshape(-1, 3)).reshape(len(var), -1, 3, 3)
-                else:
-                    # Simply pass the variable
-                    param_dict[key] = var
-
+                param_dict[key] = var
+            # for key, var in var_dict.items():
+            #     # Decode the axis-angles
+            #     if 'pose' in key or 'orient' in key:
+            #         param_dict[key] = batch_rodrigues(
+            #             var.reshape(-1, 3)).reshape(len(var), -1, 3, 3)
+            #     else:
+            #         # Simply pass the variable
+            #         param_dict[key] = var
+            
             return body_model(return_full_pose=True, get_skin=True, **param_dict)
     return model_forward
 
