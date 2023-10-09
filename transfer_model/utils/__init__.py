@@ -22,4 +22,4 @@ from .pose_utils import batch_rodrigues, batch_rot2aa
 from .metrics import v2v
 from .def_transfer import read_deformation_transfer, apply_deformation_transfer
 from .mesh_utils import get_vertices_per_edge
-from .o3d_utils import np_mesh_to_o3d
+from .o3d_utils import np_mesh_to_o3d, process_rotation_matrix, pkl_to_amass

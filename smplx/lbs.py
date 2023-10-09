@@ -228,10 +228,7 @@ def lbs(
     v_posed = pose_offsets + v_shaped
     # 4. Get the global joint location
     ## ERROR
-    ## BUG
-    print('J.shape: ', J.shape)
-    print('parents.shape: ', parents.shape)
-    print('rot_mats.shape: ', rot_mats.shape)
+
     
     J_transformed, A = batch_rigid_transform(rot_mats, J, parents, dtype=dtype)
 
@@ -343,8 +340,6 @@ def transform_mat(R: Tensor, t: Tensor) -> Tensor:
             - T: Bx4x4 Transformation matrix
     '''
     # No padding left or right, only add an extra row
-    print(R.shape)
-    print(t.shape)
     return torch.cat([F.pad(R, [0, 0, 0, 1]), F.pad(t, [0, 0, 0, 1], value=1)], dim=2)
 
 

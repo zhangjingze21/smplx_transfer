@@ -1,6 +1,3 @@
-# datasets:
-#     mesh_folder:
-#         data_folder: 'transfer_data/meshes/smplh'
 deformation_transfer_path: '/scratch/stu5/research_jul_28/Project/Motion/smplx/transfer_data/smplh2smplx_deftrafo_setup.pkl'
 mask_ids_fname: '/scratch/stu5/research_jul_28/Project/Motion/smplx/transfer_data/smplx_mask_ids.npy'
 summary_steps: 10
@@ -10,7 +7,7 @@ edge_fitting:
 
 optim:
     type: 'trust-ncg'
-    maxiters: 10
+    maxiters: 40
     gtol: 1e-06
 
 body_model:

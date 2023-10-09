@@ -1,0 +1,72 @@
+2023-10-08 20:37:04.685 | INFO     | __main__:main:133 - Start transfering smplh motion to smplx motion
+2023-10-08 20:37:04.685 | INFO     | __main__:main:134 - Model folder: /scratch/stu5/Data/SMPL-MODEL/SMPL_MODEL
+2023-10-08 20:37:04.685 | INFO     | __main__:main:135 - SMPLH folder: /scratch/stu5/Data/BMLhandball/smplh
+2023-10-08 20:37:04.685 | INFO     | __main__:main:136 - Output folder: /scratch/stu5/Data/BMLhandball/smplx
+2023-10-08 20:37:04.686 | INFO     | __main__:main:143 - Processing /scratch/stu5/Data/BMLhandball/smplh/S10_Expert/Trial_upper_left_115_poses.npz
+2023-10-08 20:37:04.686 | INFO     | __main__:main:145 - Output file: /scratch/stu5/Data/BMLhandball/smplx/S10_Expert/Trial_upper_left_115_poses.npz
+2023-10-08 20:37:08.410 | INFO     | utils.def_transfer:read_deformation_transfer:40 - Loading deformation transfer from: /scratch/stu5/research_jul_28/Project/Motion/smplx/transfer_data/smplh2smplx_deftrafo_setup.pkl
+2023-10-08 20:37:09.750 | DEBUG    | losses.losses:build_loss:46 - Building loss: vertex-edge
+2023-10-08 20:37:09.750 | INFO     | losses.losses:__init__:89 - Building edge loss with norm_type=l2, reduction=mean,
+2023-10-08 20:37:09.752 | DEBUG    | losses.losses:build_loss:46 - Building loss: l2
+2023-10-08 20:37:09.752 | INFO     | transfer_model:run_fitting:334 - Per-part: False
+2023-10-08 20:37:09.752 | INFO     | optimizers.optim_factory:build_optimizer:35 - Building: Trust-Ncg
+2023-10-08 20:37:10.329 | INFO     | optimizers.minimize:minimize:70 - [00000] Loss: 14.4469
+2023-10-08 20:37:10.358 | INFO     | optimizers.minimize:minimize:74 - [00000] Vertex-to-Vertex: 831.0156
+2023-10-08 20:37:10.358 | INFO     | optimizers.minimize:minimize:80 - [00001] Loss: 14.4469
+2023-10-08 20:37:10.387 | INFO     | optimizers.minimize:minimize:84 - [00001] Vertex-to-Vertex: 831.0156
+2023-10-08 20:37:10.387 | INFO     | optimizers.optim_factory:build_optimizer:35 - Building: Trust-Ncg
+2023-10-08 20:37:10.468 | INFO     | optimizers.minimize:minimize:70 - [00000] Loss: 7124.3647
+2023-10-08 20:37:10.496 | INFO     | optimizers.minimize:minimize:74 - [00000] Vertex-to-Vertex: 830.2100
+2023-10-08 20:37:10.496 | INFO     | optimizers.minimize:minimize:80 - [00001] Loss: 7124.3647
+2023-10-08 20:37:10.525 | INFO     | optimizers.minimize:minimize:84 - [00001] Vertex-to-Vertex: 830.2100
+2023-10-08 20:37:10.526 | INFO     | optimizers.optim_factory:build_optimizer:35 - Building: Trust-Ncg
+2023-10-08 20:37:10.942 | INFO     | optimizers.minimize:minimize:70 - [00000] Loss: 7112.0522
+2023-10-08 20:37:10.971 | INFO     | optimizers.minimize:minimize:74 - [00000] Vertex-to-Vertex: 829.1641
+2023-10-08 20:37:10.972 | INFO     | optimizers.minimize:minimize:80 - [00001] Loss: 7112.0522
+2023-10-08 20:37:11.000 | INFO     | optimizers.minimize:minimize:84 - [00001] Vertex-to-Vertex: 829.1641
+2023-10-08 20:37:17.383 | INFO     | __main__:main:143 - Processing /scratch/stu5/Data/BMLhandball/smplh/S10_Expert/Trial_upper_left_056_poses.npz
+2023-10-08 20:37:17.383 | INFO     | __main__:main:145 - Output file: /scratch/stu5/Data/BMLhandball/smplx/S10_Expert/Trial_upper_left_056_poses.npz
+2023-10-08 20:37:20.307 | INFO     | utils.def_transfer:read_deformation_transfer:40 - Loading deformation transfer from: /scratch/stu5/research_jul_28/Project/Motion/smplx/transfer_data/smplh2smplx_deftrafo_setup.pkl
+2023-10-08 20:37:21.170 | DEBUG    | losses.losses:build_loss:46 - Building loss: vertex-edge
+2023-10-08 20:37:21.170 | INFO     | losses.losses:__init__:89 - Building edge loss with norm_type=l2, reduction=mean,
+2023-10-08 20:37:21.171 | DEBUG    | losses.losses:build_loss:46 - Building loss: l2
+2023-10-08 20:37:21.171 | INFO     | transfer_model:run_fitting:334 - Per-part: False
+2023-10-08 20:37:21.171 | INFO     | optimizers.optim_factory:build_optimizer:35 - Building: Trust-Ncg
+2023-10-08 20:37:21.756 | INFO     | optimizers.minimize:minimize:70 - [00000] Loss: 14.2079
+2023-10-08 20:37:21.784 | INFO     | optimizers.minimize:minimize:74 - [00000] Vertex-to-Vertex: 831.1252
+2023-10-08 20:37:21.785 | INFO     | optimizers.minimize:minimize:80 - [00001] Loss: 14.2079
+2023-10-08 20:37:21.813 | INFO     | optimizers.minimize:minimize:84 - [00001] Vertex-to-Vertex: 831.1252
+2023-10-08 20:37:21.814 | INFO     | optimizers.optim_factory:build_optimizer:35 - Building: Trust-Ncg
+2023-10-08 20:37:21.893 | INFO     | optimizers.minimize:minimize:70 - [00000] Loss: 7094.5830
+2023-10-08 20:37:21.921 | INFO     | optimizers.minimize:minimize:74 - [00000] Vertex-to-Vertex: 830.3007
+2023-10-08 20:37:21.921 | INFO     | optimizers.minimize:minimize:80 - [00001] Loss: 7094.5830
+2023-10-08 20:37:21.950 | INFO     | optimizers.minimize:minimize:84 - [00001] Vertex-to-Vertex: 830.3007
+2023-10-08 20:37:21.950 | INFO     | optimizers.optim_factory:build_optimizer:35 - Building: Trust-Ncg
+2023-10-08 20:37:22.365 | INFO     | optimizers.minimize:minimize:70 - [00000] Loss: 7082.2563
+2023-10-08 20:37:22.393 | INFO     | optimizers.minimize:minimize:74 - [00000] Vertex-to-Vertex: 829.2331
+2023-10-08 20:37:22.394 | INFO     | optimizers.minimize:minimize:80 - [00001] Loss: 7082.2563
+2023-10-08 20:37:22.422 | INFO     | optimizers.minimize:minimize:84 - [00001] Vertex-to-Vertex: 829.2331
+2023-10-08 20:37:28.579 | INFO     | __main__:main:143 - Processing /scratch/stu5/Data/BMLhandball/smplh/S10_Expert/Trial_upper_left_209_poses.npz
+2023-10-08 20:37:28.579 | INFO     | __main__:main:145 - Output file: /scratch/stu5/Data/BMLhandball/smplx/S10_Expert/Trial_upper_left_209_poses.npz
+2023-10-08 20:37:31.654 | INFO     | utils.def_transfer:read_deformation_transfer:40 - Loading deformation transfer from: /scratch/stu5/research_jul_28/Project/Motion/smplx/transfer_data/smplh2smplx_deftrafo_setup.pkl
+2023-10-08 20:37:32.523 | DEBUG    | losses.losses:build_loss:46 - Building loss: vertex-edge
+2023-10-08 20:37:32.523 | INFO     | losses.losses:__init__:89 - Building edge loss with norm_type=l2, reduction=mean,
+2023-10-08 20:37:32.533 | DEBUG    | losses.losses:build_loss:46 - Building loss: l2
+2023-10-08 20:37:32.533 | INFO     | transfer_model:run_fitting:334 - Per-part: False
+2023-10-08 20:37:32.534 | INFO     | optimizers.optim_factory:build_optimizer:35 - Building: Trust-Ncg
+2023-10-08 20:37:33.156 | INFO     | optimizers.minimize:minimize:70 - [00000] Loss: 14.1190
+2023-10-08 20:37:33.186 | INFO     | optimizers.minimize:minimize:74 - [00000] Vertex-to-Vertex: 806.3819
+2023-10-08 20:37:33.186 | INFO     | optimizers.minimize:minimize:80 - [00001] Loss: 14.1190
+2023-10-08 20:37:33.216 | INFO     | optimizers.minimize:minimize:84 - [00001] Vertex-to-Vertex: 806.3819
+2023-10-08 20:37:33.217 | INFO     | optimizers.optim_factory:build_optimizer:35 - Building: Trust-Ncg
+2023-10-08 20:37:33.300 | INFO     | optimizers.minimize:minimize:70 - [00000] Loss: 6720.0352
+2023-10-08 20:37:33.329 | INFO     | optimizers.minimize:minimize:74 - [00000] Vertex-to-Vertex: 805.5780
+2023-10-08 20:37:33.329 | INFO     | optimizers.minimize:minimize:80 - [00001] Loss: 6720.0352
+2023-10-08 20:37:33.359 | INFO     | optimizers.minimize:minimize:84 - [00001] Vertex-to-Vertex: 805.5780
+2023-10-08 20:37:33.360 | INFO     | optimizers.optim_factory:build_optimizer:35 - Building: Trust-Ncg
+2023-10-08 20:37:33.790 | INFO     | optimizers.minimize:minimize:70 - [00000] Loss: 6708.3535
+2023-10-08 20:37:33.819 | INFO     | optimizers.minimize:minimize:74 - [00000] Vertex-to-Vertex: 804.5148
+2023-10-08 20:37:33.820 | INFO     | optimizers.minimize:minimize:80 - [00001] Loss: 6708.3535
+2023-10-08 20:37:33.849 | INFO     | optimizers.minimize:minimize:84 - [00001] Vertex-to-Vertex: 804.5148
+2023-10-08 20:37:40.361 | INFO     | __main__:main:143 - Processing /scratch/stu5/Data/BMLhandball/smplh/S10_Expert/Trial_upper_left_081_poses.npz
+2023-10-08 20:37:40.361 | INFO     | __main__:main:145 - Output file: /scratch/stu5/Data/BMLhandball/smplx/S10_Expert/Trial_upper_left_081_poses.npz

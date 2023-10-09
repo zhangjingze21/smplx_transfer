@@ -35,18 +35,18 @@ def parse_args(argv=None) -> OmegaConf:
                                     description=description)
 
     parser.add_argument('--exp-cfg', type=str, dest='exp_cfg',
-                        help='The configuration of the experiment')
+                        help='The configuration of the experiment', default="config_files/smplh2smplx.yaml")
     parser.add_argument('--exp-opts', default=[], dest='exp_opts',
                         nargs='*',
                         help='Command line arguments')
-    parser.add_argument('--motion-path', required=True, type=str, help="The path to the motion file to process")
-    parser.add_argument("--output-folder", required=True, type=str, help="The path to the output folder")
-    parser.add_argument("--batch-size", required=True, type=int)
+    # parser.add_argument('--motion-path', required=True, type=str, help="The path to the motion file to process", default="/scratch/stu5/Data/BMLhandball/smplx-mesh/smplh-mesh-S02_Novice")
+    # parser.add_argument("--output-folder", required=True, type=str, help="The path to the output folder", )
+    # parser.add_argument("--batch-size", required=True, type=int, default=1)
     cmd_args = parser.parse_args()
     cfg = default_conf.copy()
-    cfg.batch_size = cmd_args.batch_size
-    cfg.output_folder = cmd_args.output_folder
-    cfg.datasets.mesh_folder.data_folder = cmd_args.motion_path
+    # cfg.batch_size = cmd_args.batch_size
+    # cfg.output_folder = cmd_args.output_folder
+    # cfg.datasets.mesh_folder.data_folder = cmd_args.motion_path
     if cmd_args.exp_cfg:
         cfg.merge_with(OmegaConf.load(cmd_args.exp_cfg))
     if cmd_args.exp_opts:

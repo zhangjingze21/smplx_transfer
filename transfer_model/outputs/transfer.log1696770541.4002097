@@ -1,0 +1,16 @@
+2023-10-08 21:09:01.402 | INFO     | __main__:main:133 - Start transfering smplh motion to smplx motion
+2023-10-08 21:09:01.402 | INFO     | __main__:main:134 - Model folder: /scratch/stu5/Data/SMPL-MODEL/SMPL_MODEL
+2023-10-08 21:09:01.402 | INFO     | __main__:main:135 - SMPLH folder: /scratch/stu5/Data/BMLhandball/smplh
+2023-10-08 21:09:01.402 | INFO     | __main__:main:136 - Output folder: /scratch/stu5/Data/BMLhandball/smplx
+2023-10-08 21:09:01.402 | INFO     | __main__:main:143 - Processing /scratch/stu5/Data/BMLhandball/smplh/S10_Expert/Trial_upper_left_115_poses.npz
+2023-10-08 21:09:01.402 | INFO     | __main__:main:145 - Output file: /scratch/stu5/Data/BMLhandball/smplx/S10_Expert/Trial_upper_left_115_poses.npz
+2023-10-08 21:09:05.566 | INFO     | utils.def_transfer:read_deformation_transfer:40 - Loading deformation transfer from: /scratch/stu5/research_jul_28/Project/Motion/smplx/transfer_data/smplh2smplx_deftrafo_setup.pkl
+2023-10-08 21:09:06.931 | DEBUG    | losses.losses:build_loss:46 - Building loss: vertex-edge
+2023-10-08 21:09:06.931 | INFO     | losses.losses:__init__:89 - Building edge loss with norm_type=l2, reduction=mean,
+2023-10-08 21:09:06.932 | DEBUG    | losses.losses:build_loss:46 - Building loss: l2
+2023-10-08 21:09:06.933 | INFO     | transfer_model:run_fitting:334 - Per-part: False
+2023-10-08 21:09:06.933 | INFO     | optimizers.optim_factory:build_optimizer:35 - Building: Trust-Ncg
+2023-10-08 21:09:07.530 | INFO     | optimizers.minimize:minimize:70 - [00000] Loss: 14.4469
+2023-10-08 21:09:07.559 | INFO     | optimizers.minimize:minimize:74 - [00000] Vertex-to-Vertex: 831.0156
+2023-10-08 21:09:13.575 | INFO     | optimizers.minimize:minimize:70 - [00010] Loss: 6.5205
+2023-10-08 21:09:13.604 | INFO     | optimizers.minimize:minimize:74 - [00010] Vertex-to-Vertex: 381.3750

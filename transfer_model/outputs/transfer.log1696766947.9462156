@@ -1,0 +1,66 @@
+2023-10-08 20:09:07.948 | INFO     | __main__:main:117 - Start transfering smplh motion to smplx motion
+2023-10-08 20:09:07.948 | INFO     | __main__:main:118 - Model folder: /scratch/stu5/Data/SMPL-MODEL/SMPL_MODEL
+2023-10-08 20:09:07.948 | INFO     | __main__:main:119 - SMPLH folder: /scratch/stu5/Data/BMLhandball/smplh
+2023-10-08 20:09:07.948 | INFO     | __main__:main:120 - Output folder: /scratch/stu5/Data/BMLhandball/smplx
+2023-10-08 20:09:07.948 | INFO     | __main__:main:127 - Processing /scratch/stu5/Data/BMLhandball/smplh/S10_Expert/Trial_upper_left_115_poses.npz
+2023-10-08 20:09:07.948 | INFO     | __main__:main:129 - Output file: /scratch/stu5/Data/BMLhandball/smplx/S10_Expert/Trial_upper_left_115_poses.npz
+2023-10-08 20:09:11.684 | INFO     | utils.def_transfer:read_deformation_transfer:40 - Loading deformation transfer from: /scratch/stu5/research_jul_28/Project/Motion/smplx/transfer_data/smplh2smplx_deftrafo_setup.pkl
+2023-10-08 20:09:12.927 | DEBUG    | losses.losses:build_loss:46 - Building loss: vertex-edge
+2023-10-08 20:09:12.927 | INFO     | losses.losses:__init__:89 - Building edge loss with norm_type=l2, reduction=mean,
+2023-10-08 20:09:12.928 | DEBUG    | losses.losses:build_loss:46 - Building loss: l2
+2023-10-08 20:09:12.928 | INFO     | transfer_model:run_fitting:334 - Per-part: False
+2023-10-08 20:09:12.929 | INFO     | optimizers.optim_factory:build_optimizer:35 - Building: Trust-Ncg
+2023-10-08 20:09:13.045 | INFO     | optimizers.minimize:minimize:70 - [00000] Loss: 13.9721
+2023-10-08 20:09:13.055 | INFO     | optimizers.minimize:minimize:74 - [00000] Vertex-to-Vertex: 860.9543
+2023-10-08 20:09:14.195 | INFO     | optimizers.minimize:minimize:70 - [00010] Loss: 3.4038
+2023-10-08 20:09:14.203 | INFO     | optimizers.minimize:minimize:74 - [00010] Vertex-to-Vertex: 292.6276
+2023-10-08 20:09:15.538 | INFO     | optimizers.minimize:minimize:70 - [00020] Loss: 2.0628
+2023-10-08 20:09:15.549 | INFO     | optimizers.minimize:minimize:74 - [00020] Vertex-to-Vertex: 244.5461
+2023-10-08 20:09:16.741 | INFO     | optimizers.minimize:minimize:70 - [00030] Loss: 1.9730
+2023-10-08 20:09:16.752 | INFO     | optimizers.minimize:minimize:74 - [00030] Vertex-to-Vertex: 240.0702
+2023-10-08 20:09:18.043 | INFO     | optimizers.minimize:minimize:70 - [00040] Loss: 1.9093
+2023-10-08 20:09:18.054 | INFO     | optimizers.minimize:minimize:74 - [00040] Vertex-to-Vertex: 232.4002
+2023-10-08 20:09:19.370 | INFO     | optimizers.minimize:minimize:70 - [00050] Loss: 1.6558
+2023-10-08 20:09:19.382 | INFO     | optimizers.minimize:minimize:74 - [00050] Vertex-to-Vertex: 209.9577
+2023-10-08 20:09:20.527 | INFO     | optimizers.minimize:minimize:70 - [00060] Loss: 1.6428
+2023-10-08 20:09:20.538 | INFO     | optimizers.minimize:minimize:74 - [00060] Vertex-to-Vertex: 205.7646
+2023-10-08 20:09:21.952 | INFO     | optimizers.minimize:minimize:70 - [00070] Loss: 1.4857
+2023-10-08 20:09:21.963 | INFO     | optimizers.minimize:minimize:74 - [00070] Vertex-to-Vertex: 196.9614
+2023-10-08 20:09:23.295 | INFO     | optimizers.minimize:minimize:70 - [00080] Loss: 1.4170
+2023-10-08 20:09:23.306 | INFO     | optimizers.minimize:minimize:74 - [00080] Vertex-to-Vertex: 188.7174
+2023-10-08 20:09:24.611 | INFO     | optimizers.minimize:minimize:70 - [00090] Loss: 1.4124
+2023-10-08 20:09:24.621 | INFO     | optimizers.minimize:minimize:74 - [00090] Vertex-to-Vertex: 188.1810
+2023-10-08 20:09:25.805 | INFO     | optimizers.minimize:minimize:80 - [00100] Loss: 1.4015
+2023-10-08 20:09:25.815 | INFO     | optimizers.minimize:minimize:84 - [00100] Vertex-to-Vertex: 187.1460
+2023-10-08 20:09:25.816 | INFO     | optimizers.optim_factory:build_optimizer:35 - Building: Trust-Ncg
+2023-10-08 20:09:25.834 | INFO     | optimizers.minimize:minimize:70 - [00000] Loss: 338.3254
+2023-10-08 20:09:25.841 | INFO     | optimizers.minimize:minimize:74 - [00000] Vertex-to-Vertex: 183.6656
+2023-10-08 20:09:25.985 | INFO     | optimizers.minimize:minimize:70 - [00010] Loss: 188.5217
+2023-10-08 20:09:25.992 | INFO     | optimizers.minimize:minimize:74 - [00010] Vertex-to-Vertex: 112.2567
+2023-10-08 20:09:26.087 | INFO     | optimizers.minimize:minimize:70 - [00020] Loss: 188.5217
+2023-10-08 20:09:26.094 | INFO     | optimizers.minimize:minimize:74 - [00020] Vertex-to-Vertex: 112.2567
+2023-10-08 20:09:26.189 | INFO     | optimizers.minimize:minimize:70 - [00030] Loss: 188.5217
+2023-10-08 20:09:26.196 | INFO     | optimizers.minimize:minimize:74 - [00030] Vertex-to-Vertex: 112.2567
+2023-10-08 20:09:26.291 | INFO     | optimizers.minimize:minimize:70 - [00040] Loss: 188.5217
+2023-10-08 20:09:26.298 | INFO     | optimizers.minimize:minimize:74 - [00040] Vertex-to-Vertex: 112.2567
+2023-10-08 20:09:26.393 | INFO     | optimizers.minimize:minimize:70 - [00050] Loss: 188.5217
+2023-10-08 20:09:26.400 | INFO     | optimizers.minimize:minimize:74 - [00050] Vertex-to-Vertex: 112.2567
+2023-10-08 20:09:26.495 | INFO     | optimizers.minimize:minimize:70 - [00060] Loss: 188.5217
+2023-10-08 20:09:26.502 | INFO     | optimizers.minimize:minimize:74 - [00060] Vertex-to-Vertex: 112.2567
+2023-10-08 20:09:26.597 | INFO     | optimizers.minimize:minimize:70 - [00070] Loss: 188.5217
+2023-10-08 20:09:26.603 | INFO     | optimizers.minimize:minimize:74 - [00070] Vertex-to-Vertex: 112.2567
+2023-10-08 20:09:26.699 | INFO     | optimizers.minimize:minimize:70 - [00080] Loss: 188.5217
+2023-10-08 20:09:26.706 | INFO     | optimizers.minimize:minimize:74 - [00080] Vertex-to-Vertex: 112.2567
+2023-10-08 20:09:26.817 | INFO     | optimizers.minimize:minimize:70 - [00090] Loss: 188.5217
+2023-10-08 20:09:26.824 | INFO     | optimizers.minimize:minimize:74 - [00090] Vertex-to-Vertex: 112.2567
+2023-10-08 20:09:26.910 | INFO     | optimizers.minimize:minimize:80 - [00100] Loss: 188.5217
+2023-10-08 20:09:26.916 | INFO     | optimizers.minimize:minimize:84 - [00100] Vertex-to-Vertex: 112.2567
+2023-10-08 20:09:26.917 | INFO     | optimizers.optim_factory:build_optimizer:35 - Building: Trust-Ncg
+2023-10-08 20:09:27.019 | INFO     | optimizers.minimize:minimize:70 - [00000] Loss: 188.5217
+2023-10-08 20:09:27.030 | INFO     | optimizers.minimize:minimize:74 - [00000] Vertex-to-Vertex: 111.0091
+2023-10-08 20:09:28.850 | INFO     | optimizers.minimize:minimize:70 - [00010] Loss: 28.9809
+2023-10-08 20:09:28.861 | INFO     | optimizers.minimize:minimize:74 - [00010] Vertex-to-Vertex: 24.7677
+2023-10-08 20:09:37.155 | INFO     | optimizers.minimize:minimize:70 - [00020] Loss: 0.7909
+2023-10-08 20:09:37.166 | INFO     | optimizers.minimize:minimize:74 - [00020] Vertex-to-Vertex: 7.1292
+2023-10-08 20:10:03.267 | INFO     | optimizers.minimize:minimize:70 - [00030] Loss: 0.2997
+2023-10-08 20:10:03.278 | INFO     | optimizers.minimize:minimize:74 - [00030] Vertex-to-Vertex: 4.5793
